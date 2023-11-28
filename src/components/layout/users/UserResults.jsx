@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
+import GithubContext from "../../../context/github/GithubContext";
 
 import Spinner from "../Spinner";
 import UserItem from "./UserItem";
 
 export default function UserResults() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { loading, users, fetchUsers } = useContext(GithubContext);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
-
-  const fetchUsers = async () => {
-    const response = await fetch(`${process.env.REACT_APP_GITHUB_URL}/users`);
-    const data = await response.json();
-    setUsers(data);
-    setLoading(false);
-  };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
