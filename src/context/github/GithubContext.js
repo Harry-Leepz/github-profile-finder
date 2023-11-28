@@ -13,6 +13,7 @@ export const GithubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
+  // get initial set of users (TESTING PUPROSES)
   const fetchUsers = async () => {
     setLoading();
     const response = await fetch(`${GITHUB_URL}/users`, {
