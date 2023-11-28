@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Spinner from "../layout/Spinner";
+import Spinner from "../Spinner";
 import UserItem from "./UserItem";
 
 export default function UserResults() {

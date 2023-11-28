@@ -1,4 +1,4 @@
-import UserResults from "../users/UserResults";
+import UserResults from "../layout/users/UserResults";
 
 export default function Home() {
   return (
