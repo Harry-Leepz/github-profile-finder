@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import GithubContext from "../../../context/github/GithubContext";
 
 export default function UserSearch() {
-  const { users } = useContext(GithubContext);
+  const { users, searchUsers } = useContext(GithubContext);
   const [input, setInput] = useState("");
 
   const handleChange = (event) => {
@@ -17,8 +17,7 @@ export default function UserSearch() {
     if (input === "") {
       alert("Please enter something...");
     } else {
-      // @todo - search users
-
+      searchUsers(input);
       setInput("");
     }
   };
