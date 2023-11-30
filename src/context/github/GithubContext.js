@@ -29,6 +29,9 @@ export const GithubProvider = ({ children }) => {
     });
   };
 
+  // clear users state back to an empty array
+  const clearUserState = () => dispatch({ type: "CLEAR_USERS" });
+
   // set loading state when requests are being made
   const setLoading = () =>
     dispatch({
@@ -41,6 +44,7 @@ export const GithubProvider = ({ children }) => {
         users: state.users,
         loading: state.loading,
         searchUsers,
+        clearUserState,
       }}
     >
       {children}

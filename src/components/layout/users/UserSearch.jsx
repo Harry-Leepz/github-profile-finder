@@ -2,14 +2,17 @@ import { useState, useContext } from "react";
 import GithubContext from "../../../context/github/GithubContext";
 
 export default function UserSearch() {
-  const { users, searchUsers } = useContext(GithubContext);
+  const { users, searchUsers, clearUserState } = useContext(GithubContext);
   const [input, setInput] = useState("");
 
   const handleChange = (event) => {
     setInput(event.target.value);
   };
 
-  const handleClick = () => setInput("");
+  const handleClick = () => {
+    setInput("");
+    clearUserState();
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
