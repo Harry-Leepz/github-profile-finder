@@ -8,12 +8,13 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 export const GithubProvider = ({ children }) => {
   const initialState = {
     users: [],
+    user: {},
     loading: false,
   };
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  // search github api user database using username from input
+  // search github api users database using username from input
   const searchUsers = async (username) => {
     setLoading();
     const response = await fetch(`${GITHUB_URL}/search/users?q=${username}`, {
@@ -22,11 +23,30 @@ export const GithubProvider = ({ children }) => {
       },
     });
     const { items } = await response.json();
-    console.log(items);
     dispatch({
       type: "SEARCH_USERS",
       payload: items,
     });
+  };
+
+  // get github details for a single user
+  const fetchUser = async (login) => {
+    setLoading();
+    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
+      headers: {
+        Authorization: GITHUB_TOKEN,
+      },
+    });
+    if (response.status === 404) {
+      window.location = "/notfound";
+    } else {
+      const data = await response.json();
+      console.log(data);
+      dispatch({
+        type: "GET_USER",
+        payload: data,
+      });
+    }
   };
 
   // clear users state back to an empty array
@@ -42,9 +62,11 @@ export const GithubProvider = ({ children }) => {
     <GithubContext.Provider
       value={{
         users: state.users,
+        user: state.user,
         loading: state.loading,
         searchUsers,
         clearUserState,
+        fetchUser,
       }}
     >
       {children}
