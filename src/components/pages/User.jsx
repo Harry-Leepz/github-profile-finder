@@ -34,6 +34,30 @@ export default function User() {
               </figure>
             </div>
           </div>
+
+          <div className='col-span-2'>
+            <div className='mb-6'>
+              <h1 className='text-3xl card-title'>
+                {user.name}
+                <div className='ml-2 mr-1 badge badge-success'>{user.type}</div>
+                {user.hireable && (
+                  <div className='mx-1 badge badge-info'>Hireable</div>
+                )}
+              </h1>
+              <p>{user.login}</p>
+              <p>{user.bio}</p>
+              <div className='mt-4 card-actions'>
+                <a
+                  className='btn btn-outline'
+                  href={user.html_url}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  Visit Github Profile
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
