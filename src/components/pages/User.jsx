@@ -4,14 +4,17 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from "react-icons/fa";
 import Spinner from "../layout/Spinner";
 
 import GithubContext from "../../context/github/GithubContext";
+import RepoList from "../layout/repos/RepoList";
 
 export default function User() {
-  const { user, fetchUser, loading } = useContext(GithubContext);
+  const { user, fetchUser, loading, getUserRepos, repos } =
+    useContext(GithubContext);
 
   const params = useParams();
 
   useEffect(() => {
     fetchUser(params.login);
+    getUserRepos(params.login);
   }, []);
 
   if (loading) {
@@ -132,6 +135,7 @@ export default function User() {
             </div>
           </div>
         </div>
+        <RepoList repos={repos} />
       </div>
     </>
   );
