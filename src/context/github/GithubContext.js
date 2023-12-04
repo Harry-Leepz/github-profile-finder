@@ -53,11 +53,14 @@ export const GithubProvider = ({ children }) => {
   // fetch user repos for the user profile page
   const getUserRepos = async (username) => {
     setLoading();
-    const response = await fetch(`${GITHUB_URL}/users/${username}/repos`, {
-      headers: {
-        Authorization: GITHUB_TOKEN,
-      },
-    });
+    const response = await fetch(
+      `${GITHUB_URL}/users/${username}/repos?sort=created&per_page=10`,
+      {
+        headers: {
+          Authorization: GITHUB_TOKEN,
+        },
+      }
+    );
     const data = await response.json();
     dispatch({
       type: "GET_REPOS",
