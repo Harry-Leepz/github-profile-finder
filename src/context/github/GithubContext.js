@@ -15,21 +15,6 @@ export const GithubProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
-  // search github api users database using username from input
-  const searchUsers = async (username) => {
-    setLoading();
-    const response = await fetch(`${GITHUB_URL}/search/users?q=${username}`, {
-      headers: {
-        Authorization: GITHUB_TOKEN,
-      },
-    });
-    const { items } = await response.json();
-    dispatch({
-      type: "SEARCH_USERS",
-      payload: items,
-    });
-  };
-
   // get github details for a single user
   const fetchUser = async (login) => {
     setLoading();
@@ -79,11 +64,8 @@ export const GithubProvider = ({ children }) => {
   return (
     <GithubContext.Provider
       value={{
-        users: state.users,
-        user: state.user,
-        repos: state.repos,
-        loading: state.loading,
-        searchUsers,
+        ...state,
+        dispatch,
         clearUserState,
         fetchUser,
         getUserRepos,
