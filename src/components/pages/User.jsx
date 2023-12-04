@@ -57,6 +57,27 @@ export default function User() {
                 </a>
               </div>
             </div>
+            <div className='w-full rounded-lg shadow-md bg-base-100 stats'>
+              {user.location && (
+                <div className='stat'>
+                  <div className='stat-title text-md'>Location</div>
+                  <div className='text-lg stat-value'>{user.location}</div>
+                </div>
+              )}
+              {user.blog && (
+                <div className='stat'>
+                  <div className='stat-title text-md'>Website</div>
+                  <a
+                    href={`https://${user.blog}`}
+                    target='_blank'
+                    rel='noreferrer'
+                    className='text-lg stat-value'
+                  >
+                    {user.blog}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
